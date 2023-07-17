@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CustomerDTO {
 
-    private Integer id;
+    private String id;
     private String customerName;
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;
