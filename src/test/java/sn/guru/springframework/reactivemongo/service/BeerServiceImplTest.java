@@ -42,6 +42,36 @@ class BeerServiceImplTest {
         await().untilTrue(atomicBoolean);
     }
 
+    @Test
+    void getBeerByIdTest() {
+        Mono<BeerDTO> beerDTOMono = beerService.saveBeer(beerDTO);
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        beerDTOMono.subscribe(beerDTO1 -> {
+            Mono<BeerDTO> beerDTOById = beerService.getBeerById(beerDTO1.getId());
+            beerDTOById.subscribe(beerDTO2 -> {
+                System.out.println(beerDTO2.getId());
+                atomicBoolean.set(true);
+            });
+        });
+
+        await().untilTrue(atomicBoolean);
+    }
+
+    @Test
+    void getBeerByBeerNameTest() {
+        Mono<BeerDTO> beerDTOMono = beerService.saveBeer(beerDTO);
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        beerDTOMono.subscribe(beerDTO1 -> {
+            Mono<BeerDTO> beerDTOById = beerService.getBeerByBeerName(beerDTO1.getBeerName());
+            beerDTOById.subscribe(beerDTO2 -> {
+                System.out.println(beerDTO2.getId());
+                atomicBoolean.set(true);
+            });
+        });
+
+        await().untilTrue(atomicBoolean);
+    }
+
     Beer getBeer() {
         return Beer.builder()
                 .beerName("Guru")

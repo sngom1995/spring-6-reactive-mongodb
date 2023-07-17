@@ -7,4 +7,6 @@ public interface BeerService {
 
     Mono<BeerDTO> saveBeer(BeerDTO beerDTO);
     Mono<BeerDTO> getBeerById(String id);
+    Mono<BeerDTO> getBeerByBeerName(String beerName);
+    Mono<BeerDTO> getBeerByBeerStyle(String beerStyle);
 }
