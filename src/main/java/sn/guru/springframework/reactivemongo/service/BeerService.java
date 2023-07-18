@@ -11,4 +11,6 @@ public interface BeerService {
     Mono<BeerDTO> getBeerById(String id);
     Mono<BeerDTO> getBeerByBeerName(String beerName);
     Mono<BeerDTO> getBeerByBeerStyle(String beerStyle);
+
+    Mono<BeerDTO> updateBeer(String id, BeerDTO beerDTO);
 }
