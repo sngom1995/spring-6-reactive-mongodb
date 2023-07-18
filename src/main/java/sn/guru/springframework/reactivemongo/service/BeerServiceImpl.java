@@ -2,6 +2,7 @@ package sn.guru.springframework.reactivemongo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import sn.guru.springframework.reactivemongo.domain.Beer;
 import sn.guru.springframework.reactivemongo.mappers.BeerMapper;
@@ -18,6 +19,12 @@ public class BeerServiceImpl implements BeerService {
     public Mono<BeerDTO> saveBeer(BeerDTO beerDTO) {
         Beer beer = beerMapper.beerDtoToBeer(beerDTO);
         return beerRepository.save(beer)
+                .map(beerMapper::beerToBeerDto);
+    }
+
+    @Override
+    public Flux<BeerDTO> listBeers() {
+        return beerRepository.findAll()
                 .map(beerMapper::beerToBeerDto);
     }
 
